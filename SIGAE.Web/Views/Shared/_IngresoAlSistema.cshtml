@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using SIGAE.Web.Data.Entities
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<ul class="nav navbar-nav navbar-right">
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        <li>
+            <a asp-area="" asp-controller="Account" asp-action="ChangeUser">@this.User.Identity.Name</a>
+        </li>
+        <li>
+            <a asp-area="" asp-controller="Account" asp-action="Logout">Salir del sistema</a>
+        </li>
+    }
+    else
+    {
+        <li>
+            <a asp-area="" asp-controller="Account" asp-action="Login"></a>
+        </li>
+    }
+</ul>

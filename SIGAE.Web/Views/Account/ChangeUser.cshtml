@@ -1,0 +1,56 @@
+﻿@model SIGAE.Web.Models.ChangeUserViewModel
+
+@{
+    ViewData["Title"] = "Cambiar datos";
+}
+
+<h1>Cambiar datos personales</h1>
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly"></div>
+
+            <div class="form-group">
+                <label asp-for="Cedula">Cédula</label>
+                <input asp-for="Cedula" class="form-control" />
+                <span asp-validation-for="Cedula" class="text-warning"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Nombre">Nombre</label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-warning"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Apellido1">Primer apellido</label>
+                <input asp-for="Apellido1" class="form-control" />
+                <span asp-validation-for="Apellido1" class="text-warning"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Apellido2">Segundo apellido</label>
+                <input asp-for="Apellido2" class="form-control" />
+                <span asp-validation-for="Apellido2" class="text-warning"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Celular">Celular</label>
+                <input asp-for="Celular" class="form-control" />
+                <span asp-validation-for="Celular" class="text-warning"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Actualizar datos personales" class="btn btn-primary" />
+                <a asp-action="ChangePassword" class="btn btn-success">Cambiar contraseña</a>
+            </div>
+
+            <div class="text-success">@ViewBag.UserMessage</div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
