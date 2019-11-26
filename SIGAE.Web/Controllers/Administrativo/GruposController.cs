@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: Grupos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Grupo.ToListAsync());
+            return View(await _context.Grupos.ToListAsync());
         }
 
         // GET: Grupos/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var grupo = await _context.Grupo
+            var grupo = await _context.Grupos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (grupo == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var grupo = await _context.Grupo.FindAsync(id);
+            var grupo = await _context.Grupos.FindAsync(id);
             if (grupo == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var grupo = await _context.Grupo
+            var grupo = await _context.Grupos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (grupo == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var grupo = await _context.Grupo.FindAsync(id);
-            _context.Grupo.Remove(grupo);
+            var grupo = await _context.Grupos.FindAsync(id);
+            _context.Grupos.Remove(grupo);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool GrupoExists(int id)
         {
-            return _context.Grupo.Any(e => e.Id == id);
+            return _context.Grupos.Any(e => e.Id == id);
         }
     }
 }

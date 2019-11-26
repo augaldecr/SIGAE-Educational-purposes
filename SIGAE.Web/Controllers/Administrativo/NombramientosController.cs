@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: Nombramientos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Nombramiento.ToListAsync());
+            return View(await _context.Nombramientos.ToListAsync());
         }
 
         // GET: Nombramientos/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var nombramiento = await _context.Nombramiento
+            var nombramiento = await _context.Nombramientos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (nombramiento == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var nombramiento = await _context.Nombramiento.FindAsync(id);
+            var nombramiento = await _context.Nombramientos.FindAsync(id);
             if (nombramiento == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var nombramiento = await _context.Nombramiento
+            var nombramiento = await _context.Nombramientos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (nombramiento == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var nombramiento = await _context.Nombramiento.FindAsync(id);
-            _context.Nombramiento.Remove(nombramiento);
+            var nombramiento = await _context.Nombramientos.FindAsync(id);
+            _context.Nombramientos.Remove(nombramiento);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool NombramientoExists(int id)
         {
-            return _context.Nombramiento.Any(e => e.Id == id);
+            return _context.Nombramientos.Any(e => e.Id == id);
         }
     }
 }

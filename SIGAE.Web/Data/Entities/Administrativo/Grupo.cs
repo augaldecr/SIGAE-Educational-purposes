@@ -20,9 +20,6 @@
 
         public virtual IEnumerable<Matricula> Estudiantes { get; set; }
 
-        public override string ToString()
-        {
-            return $"{Nivel.Nombre}-{Seccion} - {CursoLectivo.Anio}";
-        }
+        public override string ToString() => $"{Nivel.Nombre}-{Seccion} - {CursoLectivo.Anio}";
     }
 }

@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: Localidades
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Localidad.ToListAsync());
+            return View(await _context.Localidades.ToListAsync());
         }
 
         // GET: Localidades/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var localidad = await _context.Localidad
+            var localidad = await _context.Localidades
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (localidad == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var localidad = await _context.Localidad.FindAsync(id);
+            var localidad = await _context.Localidades.FindAsync(id);
             if (localidad == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var localidad = await _context.Localidad
+            var localidad = await _context.Localidades
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (localidad == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var localidad = await _context.Localidad.FindAsync(id);
-            _context.Localidad.Remove(localidad);
+            var localidad = await _context.Localidades.FindAsync(id);
+            _context.Localidades.Remove(localidad);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool LocalidadExists(int id)
         {
-            return _context.Localidad.Any(e => e.Id == id);
+            return _context.Localidades.Any(e => e.Id == id);
         }
     }
 }

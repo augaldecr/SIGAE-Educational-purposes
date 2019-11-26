@@ -27,6 +27,12 @@ namespace SIGAE.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(
+        Configuration.GetConnectionString("DesarrolloLocal")));
+
+            services.AddTransient<DatosIniciales>();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -34,22 +40,25 @@ namespace SIGAE.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DesarrolloLocal")));
-
             services.AddScoped<IUserHelper, UserHelper>();
             services.AddScoped<IPersonaHelper, PersonaHelper>();
+            services.AddScoped<ITiposGastoHelper, TiposGastoHelper>();
+            services.AddScoped<IGastosHelper, GastoHelper>();
+            services.AddScoped<IGiraHelper, GiraHelper>();
+            services.AddScoped<ILocalidadHelper, LocalidadHelper>();
+            services.AddScoped<ITipoIdentificacionHelper, TipoIdentificacionHelper>();
+            services.AddScoped<IIdentificacionHelper, IdentificacionHelper>();
+            services.AddScoped<IGeneroHelper, GeneroHelper>();
 
-            services.AddDefaultIdentity<User>( cfg => 
-            {
-                cfg.User.RequireUniqueEmail = true;
-                cfg.Password.RequireDigit = false;
-                cfg.Password.RequiredUniqueChars = 0;
-                cfg.Password.RequireLowercase = false;
-                cfg.Password.RequireNonAlphanumeric = false;
-                cfg.Password.RequireUppercase = false;
-            })
+            services.AddDefaultIdentity<User>(cfg =>
+           {
+               cfg.User.RequireUniqueEmail = true;
+               cfg.Password.RequireDigit = false;
+               cfg.Password.RequiredUniqueChars = 0;
+               cfg.Password.RequireLowercase = false;
+               cfg.Password.RequireNonAlphanumeric = false;
+               cfg.Password.RequireUppercase = false;
+           })
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -57,16 +66,16 @@ namespace SIGAE.Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddAuthentication()
                 .AddCookie()
-                .AddJwtBearer( cfg =>
-                {
-                    cfg.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidIssuer = this.Configuration["Tokens:Issuer"],
-                        ValidAudience = this.Configuration["Tokens:Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-                            this.Configuration["Tokens:Key"]))
-                    };
-                });
+                .AddJwtBearer(cfg =>
+               {
+                   cfg.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       ValidIssuer = this.Configuration["Tokens:Issuer"],
+                       ValidAudience = this.Configuration["Tokens:Audience"],
+                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                           this.Configuration["Tokens:Key"]))
+                   };
+               });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

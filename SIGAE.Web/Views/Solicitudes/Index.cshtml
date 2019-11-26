@@ -1,0 +1,89 @@
+﻿@model IEnumerable<SIGAE.Web.Data.Entities.Becas.Solicitud>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DistanciaAlCentroEducativo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrnspPblcHorarioCentEduc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CentEducCercania)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DistanciaAMasCercano)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RazonDeNoMatricula)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DistanciaAMatriculado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observaciones)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aprobada)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DistanciaAlCentroEducativo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrnspPblcHorarioCentEduc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CentEducCercania)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DistanciaAMasCercano)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RazonDeNoMatricula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DistanciaAMatriculado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observaciones)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aprobada)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

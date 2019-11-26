@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: Cantones
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Canton.ToListAsync());
+            return View(await _context.Cantones.ToListAsync());
         }
 
         // GET: Cantones/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var canton = await _context.Canton
+            var canton = await _context.Cantones
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (canton == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var canton = await _context.Canton.FindAsync(id);
+            var canton = await _context.Cantones.FindAsync(id);
             if (canton == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var canton = await _context.Canton
+            var canton = await _context.Cantones
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (canton == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var canton = await _context.Canton.FindAsync(id);
-            _context.Canton.Remove(canton);
+            var canton = await _context.Cantones.FindAsync(id);
+            _context.Cantones.Remove(canton);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CantonExists(int id)
         {
-            return _context.Canton.Any(e => e.Id == id);
+            return _context.Cantones.Any(e => e.Id == id);
         }
     }
 }

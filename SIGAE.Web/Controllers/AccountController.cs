@@ -1,12 +1,5 @@
 ﻿namespace SIGAE.Web.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IdentityModel.Tokens.Jwt;
-    using System.Linq;
-    using System.Security.Claims;
-    using System.Text;
-    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
@@ -14,20 +7,29 @@
     using SIGAE.Web.Data.Entities;
     using SIGAE.Web.Helpers;
     using SIGAE.Web.Models;
+    using System;
+    using System.IdentityModel.Tokens.Jwt;
+    using System.Linq;
+    using System.Security.Claims;
+    using System.Text;
+    using System.Threading.Tasks;
 
     public class AccountController : Controller
     {
         private readonly IUserHelper userHelper;
         private readonly IPersonaHelper personaHelper;
         private readonly IConfiguration configuration;
+        private readonly IdentificacionHelper identificacionHelper;
 
         public AccountController(IUserHelper userHelper, 
             IPersonaHelper personaHelper, 
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IdentificacionHelper identificacionHelper)
         {
             this.userHelper = userHelper;
             this.personaHelper = personaHelper;
             this.configuration = configuration;
+            this.identificacionHelper = identificacionHelper;
         }
 
         public IActionResult Login()
@@ -74,11 +76,12 @@
         {
             if (this.ModelState.IsValid)
             {
-                var user = await this.userHelper.GetUserByEmailAsync(model.Username);
+                var user = await userHelper.GetUserByEmailAsync(model.Username).ConfigureAwait(false);
+
                 if (user == null)
                 {
                     personaHelper.SavePersona(new Persona {
-                        Cedula = model.Cedula,
+                        Identificacion = new Identificacion { NumIdentificacion = model.Cedula },
                         Nombre = model.Nombre,
                         Apellido1 = model.Apellido1,
                         Apellido2 = model.Apellido2,
@@ -95,7 +98,7 @@
                         UserName = model.Username
                     };
 
-                    var result = await this.userHelper.AddUserAsync(user, model.Password);
+                    var result = await userHelper.AddUserAsync(user, model.Password).ConfigureAwait(false);
 
                     if (result != IdentityResult.Success)
                     {
@@ -103,12 +106,12 @@
                         return this.View(model);
                     }
 
-                    var result2 = await this.userHelper.LoginAsync(
+                    var result2 = await userHelper.LoginAsync(
                         new LoginViewModel {
                             Username = model.Username,
                             Password = model.Password,
                             RememberMe = false
-                        });
+                        }).ConfigureAwait(false);
 
                     if (result2.Succeeded)
                     {
@@ -125,13 +128,13 @@
 
         public async Task<IActionResult> ChangeUser()
         {
-            var user = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+            var user = await userHelper.GetUserByEmailAsync(User.Identity.Name).ConfigureAwait(false);
             var persona = this.personaHelper.GetPersonaXEmail(this.User.Identity.Name);
 
             var model = new ChangeUserViewModel();
             if (user != null)
             {
-                model.Cedula = persona.Cedula;
+                model.Cedula = persona.Identificacion.NumIdentificacion;
                 model.Nombre = persona.Nombre;
                 model.Apellido1 = persona.Apellido1;
                 model.Apellido2 = persona.Apellido2;
@@ -145,11 +148,14 @@
         {
             if (this.ModelState.IsValid)
             {
-                var user = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                var user = await userHelper.GetUserByEmailAsync(User.Identity.Name).ConfigureAwait(false);
                 var persona = this.personaHelper.GetPersonaXEmail(this.User.Identity.Name);
+                var cedula = identificacionHelper.GetIdentificacionXCedula(model.Cedula);
+
+
                 if (user != null)
                 {
-                    persona.Cedula = model.Cedula;
+                    persona.Identificacion = cedula;
                     persona.Nombre = model.Nombre;
                     persona.Apellido1 = model.Apellido1;
                     persona.Apellido2 = model.Apellido2;
@@ -211,10 +217,10 @@
         {
             if (this.ModelState.IsValid)
             {
-                var user = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                var user = await userHelper.GetUserByEmailAsync(User.Identity.Name).ConfigureAwait(false);
                 if (user != null)
                 {
-                    var result = await this.userHelper.ValidatePasswordAsync(user, model.Password);
+                    var result = await userHelper.ValidatePasswordAsync(user, model.Password).ConfigureAwait(false);
                     if (result.Succeeded)
                     {
                         var claims = new[]
@@ -237,7 +243,7 @@
                             expiration = token.ValidTo
                         };
 
-                        return this.Created(string.Empty, results);
+                        return Created(string.Empty, results);
                     }
                 }
             }

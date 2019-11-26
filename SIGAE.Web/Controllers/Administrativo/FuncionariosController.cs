@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: Funcionarios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Funcionario.ToListAsync());
+            return View(await _context.Funcionarios.ToListAsync());
         }
 
         // GET: Funcionarios/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var funcionario = await _context.Funcionario
+            var funcionario = await _context.Funcionarios
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (funcionario == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var funcionario = await _context.Funcionario.FindAsync(id);
+            var funcionario = await _context.Funcionarios.FindAsync(id);
             if (funcionario == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var funcionario = await _context.Funcionario
+            var funcionario = await _context.Funcionarios
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (funcionario == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var funcionario = await _context.Funcionario.FindAsync(id);
-            _context.Funcionario.Remove(funcionario);
+            var funcionario = await _context.Funcionarios.FindAsync(id);
+            _context.Funcionarios.Remove(funcionario);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool FuncionarioExists(int id)
         {
-            return _context.Funcionario.Any(e => e.Id == id);
+            return _context.Funcionarios.Any(e => e.Id == id);
         }
     }
 }

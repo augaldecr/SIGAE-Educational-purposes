@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<SIGAE.Web.Data.Entities.Persona>
 
 @{
-    ViewData["Title"] = "Personas";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Personas</h1>
+<h1>Listado</h1>
 
 <p>
     <a asp-action="Create">Crear nuevo</a>
@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Cedula)
+                @Html.DisplayNameFor(model => model.Identificacion.NumIdentificacion)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
@@ -23,6 +23,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Apellido2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaNacimiento)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Celular)
@@ -37,7 +40,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Cedula)
+                @Html.DisplayFor(modelItem => item.Identificacion.NumIdentificacion)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
@@ -49,15 +52,18 @@
                 @Html.DisplayFor(modelItem => item.Apellido2)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Celular)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
             </td>
         </tr>
 }

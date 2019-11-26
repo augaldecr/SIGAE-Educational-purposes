@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Academico
         // GET: Temas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Tema.ToListAsync());
+            return View(await _context.Temas.ToListAsync());
         }
 
         // GET: Temas/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var tema = await _context.Tema
+            var tema = await _context.Temas
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tema == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var tema = await _context.Tema.FindAsync(id);
+            var tema = await _context.Temas.FindAsync(id);
             if (tema == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var tema = await _context.Tema
+            var tema = await _context.Temas
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tema == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Academico
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tema = await _context.Tema.FindAsync(id);
-            _context.Tema.Remove(tema);
+            var tema = await _context.Temas.FindAsync(id);
+            _context.Temas.Remove(tema);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TemaExists(int id)
         {
-            return _context.Tema.Any(e => e.Id == id);
+            return _context.Temas.Any(e => e.Id == id);
         }
     }
 }

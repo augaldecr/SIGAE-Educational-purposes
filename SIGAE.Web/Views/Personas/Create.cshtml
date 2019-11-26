@@ -1,10 +1,10 @@
-﻿@model SIGAE.Web.Data.Entities.Persona
+﻿@model SIGAE.Web.Models.PersonaViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear";
 }
 
-<h1>Create</h1>
+<h1>Crear</h1>
 
 <h4>Persona</h4>
 <hr />
@@ -12,11 +12,19 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
-                <label asp-for="Cedula" class="control-label"></label>
-                <input asp-for="Cedula" class="form-control" />
-                <span asp-validation-for="Cedula" class="text-danger"></span>
+                <label asp-for="NumCedula" class="control-label"></label>
+                <input asp-for="NumCedula" class="form-control" />
+                <span asp-validation-for="NumCedula" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label asp-for="TipoIdentificacionId" class="control-label"></label>
+                <select asp-for="TipoIdentificacionId" asp-items="Model.TiposIdentificacion" class="form-control"></select>
+                <span asp-validation-for="TipoIdentificacionId" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
                 <input asp-for="Nombre" class="form-control" />
@@ -31,6 +39,18 @@
                 <label asp-for="Apellido2" class="control-label"></label>
                 <input asp-for="Apellido2" class="form-control" />
                 <span asp-validation-for="Apellido2" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="GeneroId" class="control-label"></label>
+                <select asp-for="GeneroId" asp-items="Model.Generos" class="form-control"></select>
+                <span asp-validation-for="GeneroId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FechaNacimiento" class="control-label"></label>
+                <input asp-for="FechaNacimiento" class="form-control" />
+                <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Celular" class="control-label"></label>
@@ -50,7 +70,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Volver al listado</a>
 </div>
 
 @section Scripts {

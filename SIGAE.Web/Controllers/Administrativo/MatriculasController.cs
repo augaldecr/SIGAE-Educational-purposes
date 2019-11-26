@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: Matriculas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Matricula.ToListAsync());
+            return View(await _context.Matriculas.ToListAsync());
         }
 
         // GET: Matriculas/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var matricula = await _context.Matricula
+            var matricula = await _context.Matriculas
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (matricula == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var matricula = await _context.Matricula.FindAsync(id);
+            var matricula = await _context.Matriculas.FindAsync(id);
             if (matricula == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var matricula = await _context.Matricula
+            var matricula = await _context.Matriculas
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (matricula == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var matricula = await _context.Matricula.FindAsync(id);
-            _context.Matricula.Remove(matricula);
+            var matricula = await _context.Matriculas.FindAsync(id);
+            _context.Matriculas.Remove(matricula);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool MatriculaExists(int id)
         {
-            return _context.Matricula.Any(e => e.Id == id);
+            return _context.Matriculas.Any(e => e.Id == id);
         }
     }
 }

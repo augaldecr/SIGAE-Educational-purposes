@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Academico
         // GET: Modalidades
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Modalidad.ToListAsync());
+            return View(await _context.Modalidades.ToListAsync());
         }
 
         // GET: Modalidades/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var modalidad = await _context.Modalidad
+            var modalidad = await _context.Modalidades
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (modalidad == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var modalidad = await _context.Modalidad.FindAsync(id);
+            var modalidad = await _context.Modalidades.FindAsync(id);
             if (modalidad == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var modalidad = await _context.Modalidad
+            var modalidad = await _context.Modalidades
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (modalidad == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Academico
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var modalidad = await _context.Modalidad.FindAsync(id);
-            _context.Modalidad.Remove(modalidad);
+            var modalidad = await _context.Modalidades.FindAsync(id);
+            _context.Modalidades.Remove(modalidad);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ModalidadExists(int id)
         {
-            return _context.Modalidad.Any(e => e.Id == id);
+            return _context.Modalidades.Any(e => e.Id == id);
         }
     }
 }

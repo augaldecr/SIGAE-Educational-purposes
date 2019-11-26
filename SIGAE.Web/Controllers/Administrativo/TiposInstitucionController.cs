@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: TiposInstitucion
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TipoInstitucion.ToListAsync());
+            return View(await _context.TiposInstitucion.ToListAsync());
         }
 
         // GET: TiposInstitucion/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var tipoInstitucion = await _context.TipoInstitucion
+            var tipoInstitucion = await _context.TiposInstitucion
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tipoInstitucion == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var tipoInstitucion = await _context.TipoInstitucion.FindAsync(id);
+            var tipoInstitucion = await _context.TiposInstitucion.FindAsync(id);
             if (tipoInstitucion == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var tipoInstitucion = await _context.TipoInstitucion
+            var tipoInstitucion = await _context.TiposInstitucion
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tipoInstitucion == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tipoInstitucion = await _context.TipoInstitucion.FindAsync(id);
-            _context.TipoInstitucion.Remove(tipoInstitucion);
+            var tipoInstitucion = await _context.TiposInstitucion.FindAsync(id);
+            _context.TiposInstitucion.Remove(tipoInstitucion);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TipoInstitucionExists(int id)
         {
-            return _context.TipoInstitucion.Any(e => e.Id == id);
+            return _context.TiposInstitucion.Any(e => e.Id == id);
         }
     }
 }

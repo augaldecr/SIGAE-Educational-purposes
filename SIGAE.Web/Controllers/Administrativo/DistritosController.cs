@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: Distritos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Distrito.ToListAsync());
+            return View(await _context.Distritos.ToListAsync());
         }
 
         // GET: Distritos/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var distrito = await _context.Distrito
+            var distrito = await _context.Distritos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (distrito == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var distrito = await _context.Distrito.FindAsync(id);
+            var distrito = await _context.Distritos.FindAsync(id);
             if (distrito == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var distrito = await _context.Distrito
+            var distrito = await _context.Distritos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (distrito == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var distrito = await _context.Distrito.FindAsync(id);
-            _context.Distrito.Remove(distrito);
+            var distrito = await _context.Distritos.FindAsync(id);
+            _context.Distritos.Remove(distrito);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool DistritoExists(int id)
         {
-            return _context.Distrito.Any(e => e.Id == id);
+            return _context.Distritos.Any(e => e.Id == id);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Academico
         // GET: TiposAsignatura
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TipoAsignatura.ToListAsync());
+            return View(await _context.TiposAsignatura.ToListAsync());
         }
 
         // GET: TiposAsignatura/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var tipoAsignatura = await _context.TipoAsignatura
+            var tipoAsignatura = await _context.TiposAsignatura
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tipoAsignatura == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var tipoAsignatura = await _context.TipoAsignatura.FindAsync(id);
+            var tipoAsignatura = await _context.TiposAsignatura.FindAsync(id);
             if (tipoAsignatura == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var tipoAsignatura = await _context.TipoAsignatura
+            var tipoAsignatura = await _context.TiposAsignatura
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tipoAsignatura == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Academico
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tipoAsignatura = await _context.TipoAsignatura.FindAsync(id);
-            _context.TipoAsignatura.Remove(tipoAsignatura);
+            var tipoAsignatura = await _context.TiposAsignatura.FindAsync(id);
+            _context.TiposAsignatura.Remove(tipoAsignatura);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TipoAsignaturaExists(int id)
         {
-            return _context.TipoAsignatura.Any(e => e.Id == id);
+            return _context.TiposAsignatura.Any(e => e.Id == id);
         }
     }
 }

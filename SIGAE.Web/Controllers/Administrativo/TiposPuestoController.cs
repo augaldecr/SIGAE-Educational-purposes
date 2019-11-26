@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: TiposPuesto
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TipoPuesto.ToListAsync());
+            return View(await _context.TiposPuesto.ToListAsync());
         }
 
         // GET: TiposPuesto/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var tipoPuesto = await _context.TipoPuesto
+            var tipoPuesto = await _context.TiposPuesto
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tipoPuesto == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var tipoPuesto = await _context.TipoPuesto.FindAsync(id);
+            var tipoPuesto = await _context.TiposPuesto.FindAsync(id);
             if (tipoPuesto == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var tipoPuesto = await _context.TipoPuesto
+            var tipoPuesto = await _context.TiposPuesto
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tipoPuesto == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tipoPuesto = await _context.TipoPuesto.FindAsync(id);
-            _context.TipoPuesto.Remove(tipoPuesto);
+            var tipoPuesto = await _context.TiposPuesto.FindAsync(id);
+            _context.TiposPuesto.Remove(tipoPuesto);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TipoPuestoExists(int id)
         {
-            return _context.TipoPuesto.Any(e => e.Id == id);
+            return _context.TiposPuesto.Any(e => e.Id == id);
         }
     }
 }

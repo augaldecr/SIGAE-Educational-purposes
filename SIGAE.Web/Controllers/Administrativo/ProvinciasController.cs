@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: Provincias
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Provincia.ToListAsync());
+            return View(await _context.Provincias.ToListAsync());
         }
 
         // GET: Provincias/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var provincia = await _context.Provincia
+            var provincia = await _context.Provincias
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (provincia == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var provincia = await _context.Provincia.FindAsync(id);
+            var provincia = await _context.Provincias.FindAsync(id);
             if (provincia == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var provincia = await _context.Provincia
+            var provincia = await _context.Provincias
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (provincia == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var provincia = await _context.Provincia.FindAsync(id);
-            _context.Provincia.Remove(provincia);
+            var provincia = await _context.Provincias.FindAsync(id);
+            _context.Provincias.Remove(provincia);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProvinciaExists(int id)
         {
-            return _context.Provincia.Any(e => e.Id == id);
+            return _context.Provincias.Any(e => e.Id == id);
         }
     }
 }

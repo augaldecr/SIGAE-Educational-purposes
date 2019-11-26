@@ -4,14 +4,13 @@
     using System.ComponentModel.DataAnnotations;
 
     //Pueblo, ciudad, villa
-    public class Localidad : IEntity
+    public class Localidad : EntidadBase, IEntity
     {
-        public int Id { get; set; }
-        [Required]
-        public string Nombre { get; set; }
         [Required]
         public Distrito Distrito { get; set; }
 
         public virtual IEnumerable<Institucion> Instituciones { get; set; }
+
+        public override string ToString() => $"{Nombre} - {Distrito.Nombre}";
     }
 }

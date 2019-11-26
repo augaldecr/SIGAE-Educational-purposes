@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: TiposNombramiento
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TipoNombramiento.ToListAsync());
+            return View(await _context.TiposNombramiento.ToListAsync());
         }
 
         // GET: TiposNombramiento/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var tipoNombramiento = await _context.TipoNombramiento
+            var tipoNombramiento = await _context.TiposNombramiento
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tipoNombramiento == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var tipoNombramiento = await _context.TipoNombramiento.FindAsync(id);
+            var tipoNombramiento = await _context.TiposNombramiento.FindAsync(id);
             if (tipoNombramiento == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var tipoNombramiento = await _context.TipoNombramiento
+            var tipoNombramiento = await _context.TiposNombramiento
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tipoNombramiento == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tipoNombramiento = await _context.TipoNombramiento.FindAsync(id);
-            _context.TipoNombramiento.Remove(tipoNombramiento);
+            var tipoNombramiento = await _context.TiposNombramiento.FindAsync(id);
+            _context.TiposNombramiento.Remove(tipoNombramiento);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TipoNombramientoExists(int id)
         {
-            return _context.TipoNombramiento.Any(e => e.Id == id);
+            return _context.TiposNombramiento.Any(e => e.Id == id);
         }
     }
 }

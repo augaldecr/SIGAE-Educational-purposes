@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: Regionales
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Regional.ToListAsync());
+            return View(await _context.Regionales.ToListAsync());
         }
 
         // GET: Regionales/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var regional = await _context.Regional
+            var regional = await _context.Regionales
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (regional == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var regional = await _context.Regional.FindAsync(id);
+            var regional = await _context.Regionales.FindAsync(id);
             if (regional == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var regional = await _context.Regional
+            var regional = await _context.Regionales
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (regional == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var regional = await _context.Regional.FindAsync(id);
-            _context.Regional.Remove(regional);
+            var regional = await _context.Regionales.FindAsync(id);
+            _context.Regionales.Remove(regional);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool RegionalExists(int id)
         {
-            return _context.Regional.Any(e => e.Id == id);
+            return _context.Regionales.Any(e => e.Id == id);
         }
     }
 }

@@ -1,10 +1,11 @@
-﻿namespace SIGAE.Web.Data.Entities.Academico
+﻿using SIGAE.Web.Data.Entities.Administrativo;
+using SIGAE.Web.Data.Entities.Misc;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace SIGAE.Web.Data.Entities.Academico
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using Administrativo;
-    using Misc;
     public class Asignacion : Publicacion
     {
         public int Puntos { get; set; }

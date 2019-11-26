@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: Niveles
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Nivel.ToListAsync());
+            return View(await _context.Niveles.ToListAsync());
         }
 
         // GET: Niveles/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var nivel = await _context.Nivel
+            var nivel = await _context.Niveles
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (nivel == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var nivel = await _context.Nivel.FindAsync(id);
+            var nivel = await _context.Niveles.FindAsync(id);
             if (nivel == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var nivel = await _context.Nivel
+            var nivel = await _context.Niveles
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (nivel == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var nivel = await _context.Nivel.FindAsync(id);
-            _context.Nivel.Remove(nivel);
+            var nivel = await _context.Niveles.FindAsync(id);
+            _context.Niveles.Remove(nivel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool NivelExists(int id)
         {
-            return _context.Nivel.Any(e => e.Id == id);
+            return _context.Niveles.Any(e => e.Id == id);
         }
     }
 }

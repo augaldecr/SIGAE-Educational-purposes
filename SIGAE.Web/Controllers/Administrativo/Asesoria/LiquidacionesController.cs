@@ -2,27 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SIGAE.Web.Data;
+using SIGAE.Web.Data.Entities;
 using SIGAE.Web.Data.Entities.Administrativo.Asesoria;
+using SIGAE.Web.Helpers;
 
 namespace SIGAE.Web.Controllers.Administrativo.Asesoria
 {
+    [Authorize]
     public class LiquidacionesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IUserHelper userHelper;
 
-        public LiquidacionesController(ApplicationDbContext context)
+        public LiquidacionesController(ApplicationDbContext context, IUserHelper userHelper)
         {
             _context = context;
+            this.userHelper = userHelper;
         }
 
         // GET: Liquidaciones
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Liquidacion.ToListAsync());
+            return View(await _context.Liquidaciones.ToListAsync());
         }
 
         // GET: Liquidaciones/Details/5
@@ -33,7 +39,7 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
                 return NotFound();
             }
 
-            var liquidacion = await _context.Liquidacion
+            var liquidacion = await _context.Liquidaciones
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (liquidacion == null)
             {
@@ -46,7 +52,9 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
         // GET: Liquidaciones/Create
         public IActionResult Create()
         {
-            return View();
+            var l = new Liquidacion();
+            //l.Giras = new List<Gira>();
+            return View(l);
         }
 
         // POST: Liquidaciones/Create
@@ -54,10 +62,12 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NumBoletaLiquidacion,NumBoletaTransporte,FechaSolicitud,FechaAprobacion,Observaciones,Aceptado")] Liquidacion liquidacion)
+        public async Task<IActionResult> Create([Bind("Id,NumBoletaLiquidacion,NumBoletaTransporte,FechaSolicitud,FechaAprobacion,Giras,Observaciones,Aceptado")] Liquidacion liquidacion)
         {
             if (ModelState.IsValid)
             {
+                var user = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                liquidacion.Usuario = user;
                 _context.Add(liquidacion);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -73,7 +83,7 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
                 return NotFound();
             }
 
-            var liquidacion = await _context.Liquidacion.FindAsync(id);
+            var liquidacion = await _context.Liquidaciones.FindAsync(id);
             if (liquidacion == null)
             {
                 return NotFound();
@@ -124,7 +134,7 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
                 return NotFound();
             }
 
-            var liquidacion = await _context.Liquidacion
+            var liquidacion = await _context.Liquidaciones
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (liquidacion == null)
             {
@@ -139,15 +149,15 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var liquidacion = await _context.Liquidacion.FindAsync(id);
-            _context.Liquidacion.Remove(liquidacion);
+            var liquidacion = await _context.Liquidaciones.FindAsync(id);
+            _context.Liquidaciones.Remove(liquidacion);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool LiquidacionExists(int id)
         {
-            return _context.Liquidacion.Any(e => e.Id == id);
+            return _context.Liquidaciones.Any(e => e.Id == id);
         }
     }
 }

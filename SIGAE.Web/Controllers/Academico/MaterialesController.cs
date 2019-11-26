@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Academico
         // GET: Materiales
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Material.ToListAsync());
+            return View(await _context.Materiales.ToListAsync());
         }
 
         // GET: Materiales/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var material = await _context.Material
+            var material = await _context.Materiales
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (material == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var material = await _context.Material.FindAsync(id);
+            var material = await _context.Materiales.FindAsync(id);
             if (material == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var material = await _context.Material
+            var material = await _context.Materiales
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (material == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Academico
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var material = await _context.Material.FindAsync(id);
-            _context.Material.Remove(material);
+            var material = await _context.Materiales.FindAsync(id);
+            _context.Materiales.Remove(material);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool MaterialExists(int id)
         {
-            return _context.Material.Any(e => e.Id == id);
+            return _context.Materiales.Any(e => e.Id == id);
         }
     }
 }

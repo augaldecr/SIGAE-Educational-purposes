@@ -3,11 +3,8 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class Canton : IEntity
+    public class Canton : EntidadBase, IEntity
     {
-        public int Id { get; set; }
-        [Required]
-        public string Nombre { get; set; }
         [Required]
         public Provincia Provincia { get; set; }
 

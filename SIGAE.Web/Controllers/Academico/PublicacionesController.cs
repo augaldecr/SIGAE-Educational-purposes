@@ -19,7 +19,7 @@ namespace SIGAE.Web.Controllers.Academico
         // GET: Publicaciones
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Publicacion.ToListAsync());
+            return View(await _context.Publicaciones.ToListAsync());
         }
 
         // GET: Publicaciones/Details/5
@@ -30,7 +30,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var publicacion = await _context.Publicacion
+            var publicacion = await _context.Publicaciones
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (publicacion == null)
             {
@@ -70,7 +70,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var publicacion = await _context.Publicacion.FindAsync(id);
+            var publicacion = await _context.Publicaciones.FindAsync(id);
             if (publicacion == null)
             {
                 return NotFound();
@@ -121,7 +121,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var publicacion = await _context.Publicacion
+            var publicacion = await _context.Publicaciones
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (publicacion == null)
             {
@@ -136,15 +136,15 @@ namespace SIGAE.Web.Controllers.Academico
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var publicacion = await _context.Publicacion.FindAsync(id);
-            _context.Publicacion.Remove(publicacion);
+            var publicacion = await _context.Publicaciones.FindAsync(id);
+            _context.Publicaciones.Remove(publicacion);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PublicacionExists(int id)
         {
-            return _context.Publicacion.Any(e => e.Id == id);
+            return _context.Publicaciones.Any(e => e.Id == id);
         }
     }
 }

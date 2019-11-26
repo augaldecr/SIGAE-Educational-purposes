@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Academico
         // GET: TiposEvaluacion
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TipoEvaluacion.ToListAsync());
+            return View(await _context.TiposEvaluacion.ToListAsync());
         }
 
         // GET: TiposEvaluacion/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var tipoEvaluacion = await _context.TipoEvaluacion
+            var tipoEvaluacion = await _context.TiposEvaluacion
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tipoEvaluacion == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var tipoEvaluacion = await _context.TipoEvaluacion.FindAsync(id);
+            var tipoEvaluacion = await _context.TiposEvaluacion.FindAsync(id);
             if (tipoEvaluacion == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var tipoEvaluacion = await _context.TipoEvaluacion
+            var tipoEvaluacion = await _context.TiposEvaluacion
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tipoEvaluacion == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Academico
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tipoEvaluacion = await _context.TipoEvaluacion.FindAsync(id);
-            _context.TipoEvaluacion.Remove(tipoEvaluacion);
+            var tipoEvaluacion = await _context.TiposEvaluacion.FindAsync(id);
+            _context.TiposEvaluacion.Remove(tipoEvaluacion);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TipoEvaluacionExists(int id)
         {
-            return _context.TipoEvaluacion.Any(e => e.Id == id);
+            return _context.TiposEvaluacion.Any(e => e.Id == id);
         }
     }
 }

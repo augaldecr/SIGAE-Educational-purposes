@@ -1,8 +1,8 @@
-﻿namespace SIGAE.Web.Data.Entities.Administrativo
-{
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
+namespace SIGAE.Web.Data.Entities.Administrativo
+{
     public class CursoLectivo : IEntity
     {
         public int Id { get; set; }

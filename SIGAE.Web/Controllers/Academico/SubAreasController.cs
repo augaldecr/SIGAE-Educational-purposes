@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Academico
         // GET: SubAreas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.SubArea.ToListAsync());
+            return View(await _context.SubAreas.ToListAsync());
         }
 
         // GET: SubAreas/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var subArea = await _context.SubArea
+            var subArea = await _context.SubAreas
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (subArea == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var subArea = await _context.SubArea.FindAsync(id);
+            var subArea = await _context.SubAreas.FindAsync(id);
             if (subArea == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var subArea = await _context.SubArea
+            var subArea = await _context.SubAreas
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (subArea == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Academico
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var subArea = await _context.SubArea.FindAsync(id);
-            _context.SubArea.Remove(subArea);
+            var subArea = await _context.SubAreas.FindAsync(id);
+            _context.SubAreas.Remove(subArea);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SubAreaExists(int id)
         {
-            return _context.SubArea.Any(e => e.Id == id);
+            return _context.SubAreas.Any(e => e.Id == id);
         }
     }
 }

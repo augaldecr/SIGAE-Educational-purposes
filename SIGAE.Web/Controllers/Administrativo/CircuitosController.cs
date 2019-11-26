@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: Circuitos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Circuito.ToListAsync());
+            return View(await _context.Circuitos.ToListAsync());
         }
 
         // GET: Circuitos/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var circuito = await _context.Circuito
+            var circuito = await _context.Circuitos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (circuito == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var circuito = await _context.Circuito.FindAsync(id);
+            var circuito = await _context.Circuitos.FindAsync(id);
             if (circuito == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var circuito = await _context.Circuito
+            var circuito = await _context.Circuitos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (circuito == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var circuito = await _context.Circuito.FindAsync(id);
-            _context.Circuito.Remove(circuito);
+            var circuito = await _context.Circuitos.FindAsync(id);
+            _context.Circuitos.Remove(circuito);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CircuitoExists(int id)
         {
-            return _context.Circuito.Any(e => e.Id == id);
+            return _context.Circuitos.Any(e => e.Id == id);
         }
     }
 }

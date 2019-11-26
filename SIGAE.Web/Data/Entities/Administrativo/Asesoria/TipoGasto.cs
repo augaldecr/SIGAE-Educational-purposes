@@ -1,13 +1,12 @@
-﻿namespace SIGAE.Web.Data.Entities.Administrativo.Asesoria
-{
-    using System;
-    using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 
-    public class TipoGasto : IEntity
+namespace SIGAE.Web.Data.Entities.Administrativo.Asesoria
+{
+    //Desayuno, almuerzo, cena, hospedaje, etc
+    public class TipoGasto : EntidadBase, IEntity
     {
-        public int Id { get; set; }
-        //Desayuno, almuerzo, cena, hospedaje, etc
-        [Required]
-        public String Nombre { get; set; }
+        public virtual IList<Gasto> Gastos { get; }
+
+        public override string ToString() => $"{this.Nombre}";
     }
 }

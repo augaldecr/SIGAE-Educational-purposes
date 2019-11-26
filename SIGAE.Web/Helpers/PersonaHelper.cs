@@ -1,9 +1,6 @@
 ﻿using SIGAE.Web.Data;
 using SIGAE.Web.Data.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SIGAE.Web.Helpers
 {
@@ -15,9 +12,10 @@ namespace SIGAE.Web.Helpers
         {
             this.context = context;
         }
+
         public Persona GetPersonaXCedula(string cedula)
         {
-            return context.Personas.FirstOrDefault(p => p.Cedula == cedula);
+            return context.Personas.FirstOrDefault(p => p.Identificacion.NumIdentificacion == cedula);
         }
 
         public void SavePersona(Persona persona)

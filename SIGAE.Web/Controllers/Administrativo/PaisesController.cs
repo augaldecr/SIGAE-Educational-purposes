@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: Paises
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Pais.ToListAsync());
+            return View(await _context.Paises.ToListAsync());
         }
 
         // GET: Paises/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var pais = await _context.Pais
+            var pais = await _context.Paises
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (pais == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var pais = await _context.Pais.FindAsync(id);
+            var pais = await _context.Paises.FindAsync(id);
             if (pais == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var pais = await _context.Pais
+            var pais = await _context.Paises
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (pais == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var pais = await _context.Pais.FindAsync(id);
-            _context.Pais.Remove(pais);
+            var pais = await _context.Paises.FindAsync(id);
+            _context.Paises.Remove(pais);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PaisExists(int id)
         {
-            return _context.Pais.Any(e => e.Id == id);
+            return _context.Paises.Any(e => e.Id == id);
         }
     }
 }

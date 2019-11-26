@@ -1,28 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SIGAE.Web.Data;
 using SIGAE.Web.Data.Entities.Administrativo.Asesoria;
+using SIGAE.Web.Helpers;
+using SIGAE.Web.Models;
 
 namespace SIGAE.Web.Controllers.Administrativo.Asesoria
 {
     public class GirasController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IGiraHelper girasHelper;
+        private readonly IUserHelper userHelper;
+        private readonly ILocalidadHelper localidadHelper;
 
-        public GirasController(ApplicationDbContext context)
+        public GirasController(ApplicationDbContext context,
+            IGiraHelper girasHelper,
+            IUserHelper userHelper,
+            ILocalidadHelper localidadHelper)
         {
             _context = context;
+            this.girasHelper = girasHelper;
+            this.userHelper = userHelper;
+            this.localidadHelper = localidadHelper;
         }
 
-        // GET: Giras
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Gira.ToListAsync());
+            var user = await userHelper.GetUserByEmailAsync(User.Identity.Name).ConfigureAwait(false);
+            var giras = await _context.Giras
+                .Include(x => x.LocalidadVisitada)
+                .Where(x => x.Usuario == user)
+                .ToListAsync().ConfigureAwait(false);
+            return View(giras);
         }
 
         // GET: Giras/Details/5
@@ -33,7 +45,7 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
                 return NotFound();
             }
 
-            var gira = await _context.Gira
+            var gira = await _context.Giras
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (gira == null)
             {
@@ -43,18 +55,18 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
             return View(gira);
         }
 
-        // GET: Giras/Create
         public IActionResult Create()
         {
-            return View();
+            var gira = new GiraViewModel
+            {
+                Localidades = localidadHelper.GetLocalidadesSelectListItems(),
+            };
+            return View(gira);
         }
 
-        // POST: Giras/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Fecha,FechaSalida,FechaRegreso,Motivo,Dependencia,Ruta,MontoARESEP")] Gira gira)
+        public async Task<IActionResult> Create(Gira gira)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +85,7 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
                 return NotFound();
             }
 
-            var gira = await _context.Gira.FindAsync(id);
+            var gira = await _context.Giras.FindAsync(id).ConfigureAwait(false);
             if (gira == null)
             {
                 return NotFound();
@@ -98,7 +110,7 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
                 try
                 {
                     _context.Update(gira);
-                    await _context.SaveChangesAsync();
+                    await _context.SaveChangesAsync().ConfigureAwait(false);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,8 +136,8 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
                 return NotFound();
             }
 
-            var gira = await _context.Gira
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var gira = await _context.Giras
+                .FirstOrDefaultAsync(m => m.Id == id).ConfigureAwait(false);
             if (gira == null)
             {
                 return NotFound();
@@ -139,15 +151,55 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var gira = await _context.Gira.FindAsync(id);
-            _context.Gira.Remove(gira);
-            await _context.SaveChangesAsync();
+            var gira = await _context.Giras.FindAsync(id).ConfigureAwait(false);
+            _context.Giras.Remove(gira);
+            await _context.SaveChangesAsync().ConfigureAwait(false);
             return RedirectToAction(nameof(Index));
         }
 
         private bool GiraExists(int id)
         {
-            return _context.Gira.Any(e => e.Id == id);
+            return _context.Giras.Any(e => e.Id == id);
+        }
+
+        private Gira ToGira(GiraViewModel gVw)
+        {
+            return new Gira
+            {
+                Id = gVw.Id,
+                Fecha = gVw.Fecha,
+                FechaSalida = gVw.FechaSalida,
+                FechaRegreso = gVw.FechaRegreso,
+                Motivo = gVw.Motivo,
+                Dependencia = gVw.Dependencia,
+                MontoARESEP = gVw.MontoARESEP,
+                Ruta = gVw.Ruta,
+                Usuario = gVw.Usuario,
+                //Acompanhantes = gVw.Acompanhantes,
+                //Gastos = gVw.Gastos,
+                TipoTransporte = gVw.TipoTransporte,
+                LocalidadVisitada = gVw.LocalidadVisitada,
+            };
+        }
+
+        private GiraViewModel ToGiraViewModel(Gira gira)
+        {
+            return new GiraViewModel
+            {
+                Id = gira.Id,
+                Fecha = gira.Fecha,
+                FechaSalida = gira.FechaSalida,
+                FechaRegreso = gira.FechaRegreso,
+                Motivo = gira.Motivo,
+                Dependencia = gira.Dependencia,
+                MontoARESEP = gira.MontoARESEP,
+                Ruta = gira.Ruta,
+                Usuario = gira.Usuario,
+                //Acompanhantes = gira.Acompanhantes,
+                //Gastos = gira.Gastos,
+                TipoTransporte = gira.TipoTransporte,
+                LocalidadVisitada = gira.LocalidadVisitada,
+            };
         }
     }
 }

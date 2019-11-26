@@ -1,13 +1,10 @@
-﻿namespace SIGAE.Web.Data.Entities.Administrativo
-{
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-    public class Provincia : IEntity
+namespace SIGAE.Web.Data.Entities.Administrativo
+{
+    public class Provincia : EntidadBase, IEntity
     {
-        public int Id { get; set; }
-        [Required]
-        public string Nombre { get; set; }
         [Required]
         [Display(Name = "País")]
         public Pais Pais { get; set; }

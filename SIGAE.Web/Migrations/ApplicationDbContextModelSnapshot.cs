@@ -155,7 +155,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasIndex("TipoEvaluacionId");
 
-                    b.ToTable("Asignatura");
+                    b.ToTable("Asignaturas");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Asignatura");
                 });
@@ -175,7 +175,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasIndex("ModalidadId");
 
-                    b.ToTable("Especialidad");
+                    b.ToTable("Especialidades");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Academico.Modalidad", b =>
@@ -189,7 +189,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Modalidad");
+                    b.ToTable("Modalidades");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Academico.Publicacion", b =>
@@ -218,7 +218,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasIndex("TemaId");
 
-                    b.ToTable("Publicacion");
+                    b.ToTable("Publicaciones");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Publicacion");
                 });
@@ -238,7 +238,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasIndex("AsignaturaId");
 
-                    b.ToTable("Tema");
+                    b.ToTable("Temas");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Academico.TipoAsignacion", b =>
@@ -252,7 +252,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TipoAsignacion");
+                    b.ToTable("TiposAsignacion");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Academico.TipoAsignatura", b =>
@@ -266,7 +266,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TipoAsignatura");
+                    b.ToTable("TiposAsignatura");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Academico.TipoEvaluacion", b =>
@@ -280,7 +280,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TipoEvaluacion");
+                    b.ToTable("TiposEvaluacion");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Asesoria.Gasto", b =>
@@ -289,13 +289,15 @@ namespace SIGAE.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Asignado");
+
                     b.Property<string>("Factura");
 
                     b.Property<int?>("GiraId");
 
                     b.Property<int>("Monto");
 
-                    b.Property<int>("TipoGastoId");
+                    b.Property<int?>("TipoGastoId");
 
                     b.Property<string>("UsuarioId");
 
@@ -307,7 +309,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Gasto");
+                    b.ToTable("Gastos");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Asesoria.Gira", b =>
@@ -351,7 +353,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Gira");
+                    b.ToTable("Giras");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Asesoria.Liquidacion", b =>
@@ -381,7 +383,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Liquidacion");
+                    b.ToTable("Liquidaciones");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Asesoria.TipoGasto", b =>
@@ -395,7 +397,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TipoGasto");
+                    b.ToTable("TiposGasto");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Asesoria.TipoTransporte", b =>
@@ -409,7 +411,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TipoTransporte");
+                    b.ToTable("TiposTransporte");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Canton", b =>
@@ -427,7 +429,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasIndex("ProvinciaId");
 
-                    b.ToTable("Canton");
+                    b.ToTable("Cantones");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Circuito", b =>
@@ -445,7 +447,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasIndex("RegionalId");
 
-                    b.ToTable("Circuito");
+                    b.ToTable("Circuitos");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.CursoLectivo", b =>
@@ -461,7 +463,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CursoLectivo");
+                    b.ToTable("CursosLectivos");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Distrito", b =>
@@ -479,7 +481,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasIndex("CantonId");
 
-                    b.ToTable("Distrito");
+                    b.ToTable("Distritos");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Funcionario", b =>
@@ -492,17 +494,13 @@ namespace SIGAE.Web.Migrations
 
                     b.Property<int>("PersonaId");
 
-                    b.Property<int>("PuestoId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("GiraId");
 
                     b.HasIndex("PersonaId");
 
-                    b.HasIndex("PuestoId");
-
-                    b.ToTable("Funcionario");
+                    b.ToTable("Funcionarios");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Grupo", b =>
@@ -532,7 +530,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasIndex("NivelId");
 
-                    b.ToTable("Grupo");
+                    b.ToTable("Grupos");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Institucion", b =>
@@ -582,7 +580,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasIndex("TipoInstitucionId");
 
-                    b.ToTable("Institucion");
+                    b.ToTable("Instituciones");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Localidad", b =>
@@ -600,7 +598,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasIndex("DistritoId");
 
-                    b.ToTable("Localidad");
+                    b.ToTable("Localidades");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Matricula", b =>
@@ -612,17 +610,21 @@ namespace SIGAE.Web.Migrations
                     b.Property<string>("Carnet")
                         .IsRequired();
 
-                    b.Property<int?>("GrupoId");
+                    b.Property<int>("CursoLectivoId");
 
-                    b.Property<int>("PersonaId");
+                    b.Property<int>("EstudianteId");
+
+                    b.Property<int?>("GrupoId");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CursoLectivoId");
+
+                    b.HasIndex("EstudianteId");
+
                     b.HasIndex("GrupoId");
 
-                    b.HasIndex("PersonaId");
-
-                    b.ToTable("Matricula");
+                    b.ToTable("Matriculas");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.ModalidadInstitucion", b =>
@@ -636,7 +638,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ModalidadInstitucion");
+                    b.ToTable("ModalidadesInstitucion");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Nivel", b =>
@@ -650,7 +652,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Nivel");
+                    b.ToTable("Niveles");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Nombramiento", b =>
@@ -681,7 +683,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasIndex("TipoNombramientoId");
 
-                    b.ToTable("Nombramiento");
+                    b.ToTable("Nombramientos");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Pais", b =>
@@ -695,7 +697,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pais");
+                    b.ToTable("Paises");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Provincia", b =>
@@ -713,7 +715,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasIndex("PaisId");
 
-                    b.ToTable("Provincia");
+                    b.ToTable("Provincias");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Puesto", b =>
@@ -731,7 +733,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasIndex("TipoPuestoId");
 
-                    b.ToTable("Puesto");
+                    b.ToTable("Puestos");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Regional", b =>
@@ -745,7 +747,21 @@ namespace SIGAE.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Regional");
+                    b.ToTable("Regionales");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.RutaTransporte", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RutaTransporte");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.TipoInstitucion", b =>
@@ -759,7 +775,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TipoInstitucion");
+                    b.ToTable("TiposInstitucion");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.TipoLocalizacion", b =>
@@ -773,7 +789,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TipoLocalizacion");
+                    b.ToTable("TiposLocalizacion");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.TipoNombramiento", b =>
@@ -787,7 +803,7 @@ namespace SIGAE.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TipoNombramiento");
+                    b.ToTable("TiposNombramiento");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.TipoPuesto", b =>
@@ -801,7 +817,184 @@ namespace SIGAE.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TipoPuesto");
+                    b.ToTable("TiposPuesto");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Becas.Beca", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<string>("Nombre")
+                        .IsRequired();
+
+                    b.Property<int?>("TipoBecaId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TipoBecaId");
+
+                    b.ToTable("Beca");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Beca");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Becas.Familiar", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ParentescoId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentescoId");
+
+                    b.ToTable("Familiar");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Becas.Parentesco", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Parentesco");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Becas.Solicitud", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Aprobada");
+
+                    b.Property<int>("BecaSolicitadaId");
+
+                    b.Property<bool>("CentEducCercania");
+
+                    b.Property<int?>("CentroEducativoCercanoId");
+
+                    b.Property<string>("Direccion")
+                        .IsRequired();
+
+                    b.Property<string>("DistanciaAMasCercano");
+
+                    b.Property<string>("DistanciaAMatriculado");
+
+                    b.Property<string>("DistanciaAlCentroEducativo")
+                        .IsRequired();
+
+                    b.Property<int>("EncargadoId");
+
+                    b.Property<DateTime>("Fecha");
+
+                    b.Property<int>("NumSubsidioTransporteId");
+
+                    b.Property<string>("Observaciones");
+
+                    b.Property<int>("PobladoId");
+
+                    b.Property<string>("RazonDeNoMatricula");
+
+                    b.Property<int>("RutaId");
+
+                    b.Property<int>("SolicitanteId");
+
+                    b.Property<bool>("TrnspPblcHorarioCentEduc");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BecaSolicitadaId");
+
+                    b.HasIndex("CentroEducativoCercanoId");
+
+                    b.HasIndex("EncargadoId");
+
+                    b.HasIndex("NumSubsidioTransporteId");
+
+                    b.HasIndex("PobladoId");
+
+                    b.HasIndex("RutaId");
+
+                    b.HasIndex("SolicitanteId");
+
+                    b.ToTable("Solicitud");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Becas.Subsidio", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Subsidio");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Becas.TipoBeca", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TipoBeca");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Genero", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Generos");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Identificacion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("FechaExpedicion");
+
+                    b.Property<DateTime>("FechaVencimiento");
+
+                    b.Property<string>("NumIdentificacion")
+                        .IsRequired();
+
+                    b.Property<int>("TipoIdentificacionId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TipoIdentificacionId");
+
+                    b.ToTable("Identificaciones");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Misc.Archivo", b =>
@@ -816,7 +1009,8 @@ namespace SIGAE.Web.Migrations
 
                     b.Property<int?>("MaterialId");
 
-                    b.Property<string>("Nombre");
+                    b.Property<string>("Nombre")
+                        .IsRequired();
 
                     b.Property<int?>("NotificacionId");
 
@@ -830,7 +1024,79 @@ namespace SIGAE.Web.Migrations
 
                     b.HasIndex("NotificacionId");
 
-                    b.ToTable("Archivo");
+                    b.ToTable("Archivos");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Misc.Dialecto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Dialecto");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Misc.DialectoHablado", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DialectoId");
+
+                    b.Property<int?>("EstudianteId");
+
+                    b.Property<int?>("SolicitudId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DialectoId");
+
+                    b.HasIndex("EstudianteId");
+
+                    b.HasIndex("SolicitudId");
+
+                    b.ToTable("DialectoHablado");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Misc.Etnia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Etnia");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Misc.MedioTransporteSolicitado", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Costo");
+
+                    b.Property<int?>("SolicitudId");
+
+                    b.Property<int>("TipoMedioTransporteId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SolicitudId");
+
+                    b.HasIndex("TipoMedioTransporteId");
+
+                    b.ToTable("MedioTransporteSolicitado");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Misc.Notificacion", b =>
@@ -849,7 +1115,21 @@ namespace SIGAE.Web.Migrations
 
                     b.HasIndex("PersonaId");
 
-                    b.ToTable("Notificacion");
+                    b.ToTable("Notificaciones");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Misc.TipoMedioTransporte", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TipoMedioTransporte");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Persona", b =>
@@ -858,21 +1138,51 @@ namespace SIGAE.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Apellido1");
+                    b.Property<string>("Apellido1")
+                        .IsRequired();
 
-                    b.Property<string>("Apellido2");
-
-                    b.Property<string>("Cedula");
+                    b.Property<string>("Apellido2")
+                        .IsRequired();
 
                     b.Property<string>("Celular");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("Email");
 
-                    b.Property<string>("Nombre");
+                    b.Property<DateTime>("FechaNacimiento");
+
+                    b.Property<int>("GeneroId");
+
+                    b.Property<int>("IdentificacionId");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GeneroId");
+
+                    b.HasIndex("IdentificacionId");
+
                     b.ToTable("Personas");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Persona");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.TipoIdentificacion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TiposIdentificacion");
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.User", b =>
@@ -970,6 +1280,26 @@ namespace SIGAE.Web.Migrations
                     b.HasDiscriminator().HasValue("Material");
                 });
 
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Becas.BecaRemunerada", b =>
+                {
+                    b.HasBaseType("SIGAE.Web.Data.Entities.Becas.Beca");
+
+                    b.Property<decimal>("Monto");
+
+                    b.HasDiscriminator().HasValue("BecaRemunerada");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Estudiante", b =>
+                {
+                    b.HasBaseType("SIGAE.Web.Data.Entities.Persona");
+
+                    b.Property<int?>("EtniaIndigenaId");
+
+                    b.HasIndex("EtniaIndigenaId");
+
+                    b.HasDiscriminator().HasValue("Estudiante");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -1020,12 +1350,12 @@ namespace SIGAE.Web.Migrations
                     b.HasOne("SIGAE.Web.Data.Entities.Academico.TipoAsignatura", "TipoAsignatura")
                         .WithMany()
                         .HasForeignKey("TipoAsignaturaId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SIGAE.Web.Data.Entities.Academico.TipoEvaluacion", "TipoEvaluacion")
                         .WithMany()
                         .HasForeignKey("TipoEvaluacionId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Academico.Especialidad", b =>
@@ -1033,7 +1363,7 @@ namespace SIGAE.Web.Migrations
                     b.HasOne("SIGAE.Web.Data.Entities.Academico.Modalidad", "Modalidad")
                         .WithMany()
                         .HasForeignKey("ModalidadId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Academico.Publicacion", b =>
@@ -1041,12 +1371,12 @@ namespace SIGAE.Web.Migrations
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Funcionario", "Publicador")
                         .WithMany()
                         .HasForeignKey("PublicadorId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SIGAE.Web.Data.Entities.Academico.Tema", "Tema")
                         .WithMany()
                         .HasForeignKey("TemaId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Academico.Tema", b =>
@@ -1054,7 +1384,7 @@ namespace SIGAE.Web.Migrations
                     b.HasOne("SIGAE.Web.Data.Entities.Academico.Asignatura", "Asignatura")
                         .WithMany()
                         .HasForeignKey("AsignaturaId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Asesoria.Gasto", b =>
@@ -1064,9 +1394,8 @@ namespace SIGAE.Web.Migrations
                         .HasForeignKey("GiraId");
 
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Asesoria.TipoGasto", "TipoGasto")
-                        .WithMany()
-                        .HasForeignKey("TipoGastoId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .WithMany("Gastos")
+                        .HasForeignKey("TipoGastoId");
 
                     b.HasOne("SIGAE.Web.Data.Entities.User", "Usuario")
                         .WithMany()
@@ -1082,12 +1411,12 @@ namespace SIGAE.Web.Migrations
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Localidad", "LocalidadVisitada")
                         .WithMany()
                         .HasForeignKey("LocalidadVisitadaId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Asesoria.TipoTransporte", "TipoTransporte")
-                        .WithMany()
+                        .WithMany("Giras")
                         .HasForeignKey("TipoTransporteId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SIGAE.Web.Data.Entities.User", "Usuario")
                         .WithMany()
@@ -1099,7 +1428,7 @@ namespace SIGAE.Web.Migrations
                     b.HasOne("SIGAE.Web.Data.Entities.User", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Canton", b =>
@@ -1107,7 +1436,7 @@ namespace SIGAE.Web.Migrations
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Provincia", "Provincia")
                         .WithMany("Cantones")
                         .HasForeignKey("ProvinciaId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Circuito", b =>
@@ -1115,7 +1444,7 @@ namespace SIGAE.Web.Migrations
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Regional", "Regional")
                         .WithMany("Circuitos")
                         .HasForeignKey("RegionalId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Distrito", b =>
@@ -1123,24 +1452,19 @@ namespace SIGAE.Web.Migrations
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Canton", "Canton")
                         .WithMany("Distritos")
                         .HasForeignKey("CantonId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Funcionario", b =>
                 {
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Asesoria.Gira")
-                        .WithMany("Acompañantes")
+                        .WithMany("Acompanhantes")
                         .HasForeignKey("GiraId");
 
                     b.HasOne("SIGAE.Web.Data.Entities.Persona", "Persona")
                         .WithMany()
                         .HasForeignKey("PersonaId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Puesto", "Puesto")
-                        .WithMany()
-                        .HasForeignKey("PuestoId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Grupo", b =>
@@ -1152,17 +1476,17 @@ namespace SIGAE.Web.Migrations
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.CursoLectivo", "CursoLectivo")
                         .WithMany("Grupos")
                         .HasForeignKey("CursoLectivoId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Institucion", "Institucion")
                         .WithMany("Grupos")
                         .HasForeignKey("InstitucionId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Nivel", "Nivel")
                         .WithMany()
                         .HasForeignKey("NivelId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Institucion", b =>
@@ -1170,22 +1494,22 @@ namespace SIGAE.Web.Migrations
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Circuito", "Circuito")
                         .WithMany("Instituciones")
                         .HasForeignKey("CircuitoId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Localidad", "Localidad")
                         .WithMany("Instituciones")
                         .HasForeignKey("LocalidadId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.ModalidadInstitucion", "Modalidad")
                         .WithMany()
                         .HasForeignKey("ModalidadId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.TipoInstitucion", "TipoInstitucion")
                         .WithMany()
                         .HasForeignKey("TipoInstitucionId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Localidad", b =>
@@ -1193,19 +1517,24 @@ namespace SIGAE.Web.Migrations
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Distrito", "Distrito")
                         .WithMany("Localidades")
                         .HasForeignKey("DistritoId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Matricula", b =>
                 {
+                    b.HasOne("SIGAE.Web.Data.Entities.Administrativo.CursoLectivo", "CursoLectivo")
+                        .WithMany()
+                        .HasForeignKey("CursoLectivoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SIGAE.Web.Data.Entities.Estudiante", "Estudiante")
+                        .WithMany()
+                        .HasForeignKey("EstudianteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Grupo", "Grupo")
                         .WithMany("Estudiantes")
                         .HasForeignKey("GrupoId");
-
-                    b.HasOne("SIGAE.Web.Data.Entities.Persona", "Persona")
-                        .WithMany()
-                        .HasForeignKey("PersonaId")
-                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Nombramiento", b =>
@@ -1213,22 +1542,22 @@ namespace SIGAE.Web.Migrations
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Funcionario", "Funcionario")
                         .WithMany()
                         .HasForeignKey("FuncionarioId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Institucion", "Institucion")
                         .WithMany()
                         .HasForeignKey("InstitucionId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Puesto", "Puesto")
                         .WithMany()
                         .HasForeignKey("PuestoId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.TipoNombramiento", "TipoNombramiento")
                         .WithMany()
                         .HasForeignKey("TipoNombramientoId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Provincia", b =>
@@ -1236,7 +1565,7 @@ namespace SIGAE.Web.Migrations
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Pais", "Pais")
                         .WithMany("Provincias")
                         .HasForeignKey("PaisId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Administrativo.Puesto", b =>
@@ -1244,7 +1573,66 @@ namespace SIGAE.Web.Migrations
                     b.HasOne("SIGAE.Web.Data.Entities.Administrativo.TipoPuesto", "TipoPuesto")
                         .WithMany()
                         .HasForeignKey("TipoPuestoId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Becas.Beca", b =>
+                {
+                    b.HasOne("SIGAE.Web.Data.Entities.Becas.TipoBeca", "TipoBeca")
+                        .WithMany()
+                        .HasForeignKey("TipoBecaId");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Becas.Familiar", b =>
+                {
+                    b.HasOne("SIGAE.Web.Data.Entities.Becas.Parentesco", "Parentesco")
+                        .WithMany()
+                        .HasForeignKey("ParentescoId");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Becas.Solicitud", b =>
+                {
+                    b.HasOne("SIGAE.Web.Data.Entities.Becas.Beca", "BecaSolicitada")
+                        .WithMany()
+                        .HasForeignKey("BecaSolicitadaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Institucion", "CentroEducativoCercano")
+                        .WithMany()
+                        .HasForeignKey("CentroEducativoCercanoId");
+
+                    b.HasOne("SIGAE.Web.Data.Entities.Persona", "Encargado")
+                        .WithMany()
+                        .HasForeignKey("EncargadoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SIGAE.Web.Data.Entities.Becas.Subsidio", "NumSubsidioTransporte")
+                        .WithMany()
+                        .HasForeignKey("NumSubsidioTransporteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Localidad", "Poblado")
+                        .WithMany()
+                        .HasForeignKey("PobladoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SIGAE.Web.Data.Entities.Administrativo.RutaTransporte", "Ruta")
+                        .WithMany()
+                        .HasForeignKey("RutaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SIGAE.Web.Data.Entities.Administrativo.Matricula", "Solicitante")
+                        .WithMany()
+                        .HasForeignKey("SolicitanteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Identificacion", b =>
+                {
+                    b.HasOne("SIGAE.Web.Data.Entities.TipoIdentificacion", "TipoIdentificacion")
+                        .WithMany()
+                        .HasForeignKey("TipoIdentificacionId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Misc.Archivo", b =>
@@ -1262,11 +1650,52 @@ namespace SIGAE.Web.Migrations
                         .HasForeignKey("NotificacionId");
                 });
 
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Misc.DialectoHablado", b =>
+                {
+                    b.HasOne("SIGAE.Web.Data.Entities.Misc.Dialecto", "Dialecto")
+                        .WithMany()
+                        .HasForeignKey("DialectoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SIGAE.Web.Data.Entities.Estudiante", "Estudiante")
+                        .WithMany()
+                        .HasForeignKey("EstudianteId");
+
+                    b.HasOne("SIGAE.Web.Data.Entities.Becas.Solicitud")
+                        .WithMany("DialectoHablados")
+                        .HasForeignKey("SolicitudId");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Misc.MedioTransporteSolicitado", b =>
+                {
+                    b.HasOne("SIGAE.Web.Data.Entities.Becas.Solicitud", "Solicitud")
+                        .WithMany("MediosSolicitados")
+                        .HasForeignKey("SolicitudId");
+
+                    b.HasOne("SIGAE.Web.Data.Entities.Misc.TipoMedioTransporte", "TipoMedioTransporte")
+                        .WithMany()
+                        .HasForeignKey("TipoMedioTransporteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Misc.Notificacion", b =>
                 {
                     b.HasOne("SIGAE.Web.Data.Entities.Persona", "Persona")
                         .WithMany()
                         .HasForeignKey("PersonaId");
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Persona", b =>
+                {
+                    b.HasOne("SIGAE.Web.Data.Entities.Genero", "Genero")
+                        .WithMany()
+                        .HasForeignKey("GeneroId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SIGAE.Web.Data.Entities.Identificacion", "Identificacion")
+                        .WithMany()
+                        .HasForeignKey("IdentificacionId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.User", b =>
@@ -1281,7 +1710,7 @@ namespace SIGAE.Web.Migrations
                     b.HasOne("SIGAE.Web.Data.Entities.Academico.Especialidad", "Especialidad")
                         .WithMany()
                         .HasForeignKey("EspecialidadId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIGAE.Web.Data.Entities.Academico.Asignacion", b =>
@@ -1289,7 +1718,14 @@ namespace SIGAE.Web.Migrations
                     b.HasOne("SIGAE.Web.Data.Entities.Academico.TipoAsignacion", "TipoAsignacion")
                         .WithMany()
                         .HasForeignKey("TipoAsignacionId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SIGAE.Web.Data.Entities.Estudiante", b =>
+                {
+                    b.HasOne("SIGAE.Web.Data.Entities.Misc.Etnia", "EtniaIndigena")
+                        .WithMany()
+                        .HasForeignKey("EtniaIndigenaId");
                 });
 #pragma warning restore 612, 618
         }

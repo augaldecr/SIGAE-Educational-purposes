@@ -1,9 +1,9 @@
-﻿namespace SIGAE.Web.Data.Entities.Administrativo.Asesoria
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
+namespace SIGAE.Web.Data.Entities.Administrativo.Asesoria
+{
     public class Liquidacion : IEntity
     {
         public int Id { get; set; }
@@ -22,9 +22,11 @@
         [Required]
         public User Usuario { get; set; }
         [Required]
-        public List<Gira> Giras { get; set; }
+        public virtual IList<Gira> Giras { get; }
         public String Observaciones { get; set; }
         [Required]
         public bool Aceptado { get; set; }
+
+        public override string ToString() => $"{this.Usuario.Persona.NombreCorto()} {this.FechaSolicitud}";   
     }
 }

@@ -1,8 +1,8 @@
-﻿namespace SIGAE.Web.Data.Entities.Administrativo
-{
-    using System;
-    using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
+namespace SIGAE.Web.Data.Entities.Administrativo
+{
     public class Nombramiento : IEntity
     {
         public int Id { get; set; }

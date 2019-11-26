@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: TiposLocalizacion
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TipoLocalizacion.ToListAsync());
+            return View(await _context.TiposLocalizacion.ToListAsync());
         }
 
         // GET: TiposLocalizacion/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var tipoLocalizacion = await _context.TipoLocalizacion
+            var tipoLocalizacion = await _context.TiposLocalizacion
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tipoLocalizacion == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var tipoLocalizacion = await _context.TipoLocalizacion.FindAsync(id);
+            var tipoLocalizacion = await _context.TiposLocalizacion.FindAsync(id);
             if (tipoLocalizacion == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var tipoLocalizacion = await _context.TipoLocalizacion
+            var tipoLocalizacion = await _context.TiposLocalizacion
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tipoLocalizacion == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tipoLocalizacion = await _context.TipoLocalizacion.FindAsync(id);
-            _context.TipoLocalizacion.Remove(tipoLocalizacion);
+            var tipoLocalizacion = await _context.TiposLocalizacion.FindAsync(id);
+            _context.TiposLocalizacion.Remove(tipoLocalizacion);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TipoLocalizacionExists(int id)
         {
-            return _context.TipoLocalizacion.Any(e => e.Id == id);
+            return _context.TiposLocalizacion.Any(e => e.Id == id);
         }
     }
 }

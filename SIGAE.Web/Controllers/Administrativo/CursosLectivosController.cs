@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: CursosLectivos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.CursoLectivo.ToListAsync());
+            return View(await _context.CursosLectivos.ToListAsync());
         }
 
         // GET: CursosLectivos/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var cursoLectivo = await _context.CursoLectivo
+            var cursoLectivo = await _context.CursosLectivos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (cursoLectivo == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var cursoLectivo = await _context.CursoLectivo.FindAsync(id);
+            var cursoLectivo = await _context.CursosLectivos.FindAsync(id);
             if (cursoLectivo == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var cursoLectivo = await _context.CursoLectivo
+            var cursoLectivo = await _context.CursosLectivos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (cursoLectivo == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cursoLectivo = await _context.CursoLectivo.FindAsync(id);
-            _context.CursoLectivo.Remove(cursoLectivo);
+            var cursoLectivo = await _context.CursosLectivos.FindAsync(id);
+            _context.CursosLectivos.Remove(cursoLectivo);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CursoLectivoExists(int id)
         {
-            return _context.CursoLectivo.Any(e => e.Id == id);
+            return _context.CursosLectivos.Any(e => e.Id == id);
         }
     }
 }

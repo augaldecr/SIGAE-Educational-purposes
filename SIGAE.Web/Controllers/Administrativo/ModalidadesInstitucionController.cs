@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: ModalidadesInstitucion
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ModalidadInstitucion.ToListAsync());
+            return View(await _context.ModalidadesInstitucion.ToListAsync());
         }
 
         // GET: ModalidadesInstitucion/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var modalidadInstitucion = await _context.ModalidadInstitucion
+            var modalidadInstitucion = await _context.ModalidadesInstitucion
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (modalidadInstitucion == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var modalidadInstitucion = await _context.ModalidadInstitucion.FindAsync(id);
+            var modalidadInstitucion = await _context.ModalidadesInstitucion.FindAsync(id);
             if (modalidadInstitucion == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var modalidadInstitucion = await _context.ModalidadInstitucion
+            var modalidadInstitucion = await _context.ModalidadesInstitucion
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (modalidadInstitucion == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var modalidadInstitucion = await _context.ModalidadInstitucion.FindAsync(id);
-            _context.ModalidadInstitucion.Remove(modalidadInstitucion);
+            var modalidadInstitucion = await _context.ModalidadesInstitucion.FindAsync(id);
+            _context.ModalidadesInstitucion.Remove(modalidadInstitucion);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ModalidadInstitucionExists(int id)
         {
-            return _context.ModalidadInstitucion.Any(e => e.Id == id);
+            return _context.ModalidadesInstitucion.Any(e => e.Id == id);
         }
     }
 }

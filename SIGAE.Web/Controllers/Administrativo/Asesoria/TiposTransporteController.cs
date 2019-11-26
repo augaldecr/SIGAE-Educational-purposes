@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
         // GET: TiposTransporte
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TipoTransporte.ToListAsync());
+            return View(await _context.TiposTransporte.ToListAsync());
         }
 
         // GET: TiposTransporte/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
                 return NotFound();
             }
 
-            var tipoTransporte = await _context.TipoTransporte
+            var tipoTransporte = await _context.TiposTransporte
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tipoTransporte == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
                 return NotFound();
             }
 
-            var tipoTransporte = await _context.TipoTransporte.FindAsync(id);
+            var tipoTransporte = await _context.TiposTransporte.FindAsync(id);
             if (tipoTransporte == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
                 return NotFound();
             }
 
-            var tipoTransporte = await _context.TipoTransporte
+            var tipoTransporte = await _context.TiposTransporte
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tipoTransporte == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tipoTransporte = await _context.TipoTransporte.FindAsync(id);
-            _context.TipoTransporte.Remove(tipoTransporte);
+            var tipoTransporte = await _context.TiposTransporte.FindAsync(id);
+            _context.TiposTransporte.Remove(tipoTransporte);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TipoTransporteExists(int id)
         {
-            return _context.TipoTransporte.Any(e => e.Id == id);
+            return _context.TiposTransporte.Any(e => e.Id == id);
         }
     }
 }

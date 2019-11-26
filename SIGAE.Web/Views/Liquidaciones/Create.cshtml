@@ -1,10 +1,11 @@
 ﻿@model SIGAE.Web.Data.Entities.Administrativo.Asesoria.Liquidacion
+@using SIGAE.Web.Data.Entities.Administrativo.Asesoria
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear";
 }
 
-<h1>Create</h1>
+<h1>Crear</h1>
 
 <h4>Liquidacion</h4>
 <hr />
@@ -28,28 +29,81 @@
                 <span asp-validation-for="FechaSolicitud" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FechaAprobacion" class="control-label"></label>
-                <input asp-for="FechaAprobacion" class="form-control" />
-                <span asp-validation-for="FechaAprobacion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Observaciones" class="control-label"></label>
                 <input asp-for="Observaciones" class="form-control" />
                 <span asp-validation-for="Observaciones" class="text-danger"></span>
             </div>
+            <!--Tabla de Giras-->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th hidden>Id</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Localidad</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th hidden></th>
+                        <th scope="row"></th>
+                        <td></td>
+                        <td>
+                            <button class="btn btn-success" type="button" data-toggle="modal" data-target="#editGira">
+                                Editar
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#deleteGira">
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">
+                            <button class="btn btn-primary btn-block" type="button" data-toggle="modal" data-target="#addGira">
+                                Agregar gira
+                            </button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Aceptado" /> @Html.DisplayNameFor(model => model.Aceptado)
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Volver</a>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="addGira" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Agregar gira</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

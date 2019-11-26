@@ -1,9 +1,9 @@
-﻿namespace SIGAE.Web.Data.Entities.Academico
-{
-    using Administrativo;
-    using System;
-    using System.ComponentModel.DataAnnotations;
+﻿using SIGAE.Web.Data.Entities.Administrativo;
+using System;
+using System.ComponentModel.DataAnnotations;
 
+namespace SIGAE.Web.Data.Entities.Academico
+{
     //Clase base para las publicaciones
     public abstract class Publicacion : IEntity
     {

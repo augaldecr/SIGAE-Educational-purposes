@@ -1,18 +1,12 @@
-﻿namespace SIGAE.Web.Data.Entities.Academico
-{
-    using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-    public class Tema : IEntity
+namespace SIGAE.Web.Data.Entities.Academico
+{
+    public class Tema : EntidadBase, IEntity
     {
-        public int Id { get; set; }
-        [Required]
-        public string Nombre { get; set; }
         [Required]
         public Asignatura Asignatura { get; set; }
 
-        public override string ToString()
-        {
-            return $"{this.Nombre} - {this.Asignatura.Nombre}";
-        }
+        public override string ToString() => $"{this.Nombre} - {this.Asignatura.Nombre}";
     }
 }

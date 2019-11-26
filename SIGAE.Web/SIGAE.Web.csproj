@@ -17,15 +17,31 @@
     <Compile Remove="Migrations\20190718153304_UsuariosAdded.Designer.cs" />
     <Compile Remove="Migrations\20190718155428_UsuariosAdde.cs" />
     <Compile Remove="Migrations\20190718155428_UsuariosAdde.Designer.cs" />
+    <Compile Remove="Migrations\20190718155511_Inicial.cs" />
+    <Compile Remove="Migrations\20190718155511_Inicial.Designer.cs" />
     <Compile Remove="Migrations\20190718162917_UsersAdded.cs" />
     <Compile Remove="Migrations\20190718162917_UsersAdded.Designer.cs" />
+    <Compile Remove="Migrations\20190718164431_UsersAdded.cs" />
+    <Compile Remove="Migrations\20190718164431_UsersAdded.Designer.cs" />
+    <Compile Remove="Migrations\20190722160433_LoginAdded.cs" />
+    <Compile Remove="Migrations\20190722160433_LoginAdded.Designer.cs" />
+    <Compile Remove="Migrations\20190729144826_GastosFixed.cs" />
+    <Compile Remove="Migrations\20190729144826_GastosFixed.Designer.cs" />
+    <Compile Remove="Migrations\20190729175841_Initial.cs" />
+    <Compile Remove="Migrations\20190729175841_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190729181540_Initial.cs" />
+    <Compile Remove="Migrations\20190729181540_Initial.Designer.cs" />
   </ItemGroup>
 
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
   </ItemGroup>
 
@@ -33,6 +49,7 @@
   <ItemGroup>
     <Folder Include="Controllers\Comedor\" />
     <Folder Include="Controllers\Inventario\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

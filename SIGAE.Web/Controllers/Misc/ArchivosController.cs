@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Misc
         // GET: Archivos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Archivo.ToListAsync());
+            return View(await _context.Archivos.ToListAsync());
         }
 
         // GET: Archivos/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Misc
                 return NotFound();
             }
 
-            var archivo = await _context.Archivo
+            var archivo = await _context.Archivos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (archivo == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Misc
                 return NotFound();
             }
 
-            var archivo = await _context.Archivo.FindAsync(id);
+            var archivo = await _context.Archivos.FindAsync(id);
             if (archivo == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Misc
                 return NotFound();
             }
 
-            var archivo = await _context.Archivo
+            var archivo = await _context.Archivos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (archivo == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Misc
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var archivo = await _context.Archivo.FindAsync(id);
-            _context.Archivo.Remove(archivo);
+            var archivo = await _context.Archivos.FindAsync(id);
+            _context.Archivos.Remove(archivo);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ArchivoExists(int id)
         {
-            return _context.Archivo.Any(e => e.Id == id);
+            return _context.Archivos.Any(e => e.Id == id);
         }
     }
 }

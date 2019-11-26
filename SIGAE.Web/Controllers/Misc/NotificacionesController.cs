@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Misc
         // GET: Notificaciones
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Notificacion.ToListAsync());
+            return View(await _context.Notificaciones.ToListAsync());
         }
 
         // GET: Notificaciones/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Misc
                 return NotFound();
             }
 
-            var notificacion = await _context.Notificacion
+            var notificacion = await _context.Notificaciones
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (notificacion == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Misc
                 return NotFound();
             }
 
-            var notificacion = await _context.Notificacion.FindAsync(id);
+            var notificacion = await _context.Notificaciones.FindAsync(id);
             if (notificacion == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Misc
                 return NotFound();
             }
 
-            var notificacion = await _context.Notificacion
+            var notificacion = await _context.Notificaciones
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (notificacion == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Misc
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var notificacion = await _context.Notificacion.FindAsync(id);
-            _context.Notificacion.Remove(notificacion);
+            var notificacion = await _context.Notificaciones.FindAsync(id);
+            _context.Notificaciones.Remove(notificacion);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool NotificacionExists(int id)
         {
-            return _context.Notificacion.Any(e => e.Id == id);
+            return _context.Notificaciones.Any(e => e.Id == id);
         }
     }
 }

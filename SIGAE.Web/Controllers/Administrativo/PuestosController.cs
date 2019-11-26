@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo
         // GET: Puestos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Puesto.ToListAsync());
+            return View(await _context.Puestos.ToListAsync());
         }
 
         // GET: Puestos/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var puesto = await _context.Puesto
+            var puesto = await _context.Puestos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (puesto == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var puesto = await _context.Puesto.FindAsync(id);
+            var puesto = await _context.Puestos.FindAsync(id);
             if (puesto == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo
                 return NotFound();
             }
 
-            var puesto = await _context.Puesto
+            var puesto = await _context.Puestos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (puesto == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var puesto = await _context.Puesto.FindAsync(id);
-            _context.Puesto.Remove(puesto);
+            var puesto = await _context.Puestos.FindAsync(id);
+            _context.Puestos.Remove(puesto);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PuestoExists(int id)
         {
-            return _context.Puesto.Any(e => e.Id == id);
+            return _context.Puestos.Any(e => e.Id == id);
         }
     }
 }

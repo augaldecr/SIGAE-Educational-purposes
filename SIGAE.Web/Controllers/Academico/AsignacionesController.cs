@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Academico
         // GET: Asignaciones
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Asignacion.ToListAsync());
+            return View(await _context.Asignaciones.ToListAsync());
         }
 
         // GET: Asignaciones/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var asignacion = await _context.Asignacion
+            var asignacion = await _context.Asignaciones
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (asignacion == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var asignacion = await _context.Asignacion.FindAsync(id);
+            var asignacion = await _context.Asignaciones.FindAsync(id);
             if (asignacion == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var asignacion = await _context.Asignacion
+            var asignacion = await _context.Asignaciones
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (asignacion == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Academico
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var asignacion = await _context.Asignacion.FindAsync(id);
-            _context.Asignacion.Remove(asignacion);
+            var asignacion = await _context.Asignaciones.FindAsync(id);
+            _context.Asignaciones.Remove(asignacion);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AsignacionExists(int id)
         {
-            return _context.Asignacion.Any(e => e.Id == id);
+            return _context.Asignaciones.Any(e => e.Id == id);
         }
     }
 }

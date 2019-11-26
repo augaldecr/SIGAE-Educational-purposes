@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
         // GET: TiposGasto
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TipoGasto.ToListAsync());
+            return View(await _context.TiposGasto.ToListAsync());
         }
 
         // GET: TiposGasto/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
                 return NotFound();
             }
 
-            var tipoGasto = await _context.TipoGasto
+            var tipoGasto = await _context.TiposGasto
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tipoGasto == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
                 return NotFound();
             }
 
-            var tipoGasto = await _context.TipoGasto.FindAsync(id);
+            var tipoGasto = await _context.TiposGasto.FindAsync(id);
             if (tipoGasto == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
                 return NotFound();
             }
 
-            var tipoGasto = await _context.TipoGasto
+            var tipoGasto = await _context.TiposGasto
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tipoGasto == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Administrativo.Asesoria
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tipoGasto = await _context.TipoGasto.FindAsync(id);
-            _context.TipoGasto.Remove(tipoGasto);
+            var tipoGasto = await _context.TiposGasto.FindAsync(id);
+            _context.TiposGasto.Remove(tipoGasto);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TipoGastoExists(int id)
         {
-            return _context.TipoGasto.Any(e => e.Id == id);
+            return _context.TiposGasto.Any(e => e.Id == id);
         }
     }
 }

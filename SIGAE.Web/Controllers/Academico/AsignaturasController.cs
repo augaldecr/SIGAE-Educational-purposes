@@ -22,7 +22,7 @@ namespace SIGAE.Web.Controllers.Academico
         // GET: Asignaturas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Asignatura.ToListAsync());
+            return View(await _context.Asignaturas.ToListAsync());
         }
 
         // GET: Asignaturas/Details/5
@@ -33,7 +33,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var asignatura = await _context.Asignatura
+            var asignatura = await _context.Asignaturas
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (asignatura == null)
             {
@@ -73,7 +73,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var asignatura = await _context.Asignatura.FindAsync(id);
+            var asignatura = await _context.Asignaturas.FindAsync(id);
             if (asignatura == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SIGAE.Web.Controllers.Academico
                 return NotFound();
             }
 
-            var asignatura = await _context.Asignatura
+            var asignatura = await _context.Asignaturas
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (asignatura == null)
             {
@@ -139,15 +139,15 @@ namespace SIGAE.Web.Controllers.Academico
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var asignatura = await _context.Asignatura.FindAsync(id);
-            _context.Asignatura.Remove(asignatura);
+            var asignatura = await _context.Asignaturas.FindAsync(id);
+            _context.Asignaturas.Remove(asignatura);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AsignaturaExists(int id)
         {
-            return _context.Asignatura.Any(e => e.Id == id);
+            return _context.Asignaturas.Any(e => e.Id == id);
         }
     }
 }

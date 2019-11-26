@@ -1,12 +1,11 @@
-﻿namespace SIGAE.Web.Data.Entities.Administrativo.Asesoria
-{
-    using System;
-    using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 
-    public class TipoTransporte : IEntity
+namespace SIGAE.Web.Data.Entities.Administrativo.Asesoria
+{
+    public class TipoTransporte : EntidadBase, IEntity
     {
-        public int Id { get; set; }
-        [Required]
-        public String Nombre { get; set; }
+        public virtual IList<Gira> Giras { get; }
+
+        public override string ToString() => $"{this.Nombre}";
     }
 }
